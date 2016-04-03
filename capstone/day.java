@@ -1,37 +1,41 @@
-package capstone;
+package application;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class day {
 	ArrayList<plu> pluCodes = new ArrayList<plu>();
+	private String Date;
 	
 	day(){
-		
+		System.out.println("Vuck Fictor");
+		setDate("NANI");
 	}
-	day(ArrayList<Integer> PLUcodes){
-		for(int i = 0; i < PLUcodes.size(); i++){
-				plu tempPLU = new plu(PLUcodes.get(i));
-				pluCodes.add(tempPLU);
-		}
-	}
-	public void cleanup()
-	{
-		
-		for (Iterator<plu> iterator = pluCodes.iterator(); iterator.hasNext();) {
-		    plu tempCode = iterator.next();
-		    tempCode.cleanup();
-		    if (tempCode.intervals.isEmpty()) {
-		        iterator.remove();
-		    }
+	
+	day(ArrayList<Integer> PLUcodes) {
+		for(int i = 0; i < PLUcodes.size(); i++) {
+			plu tempPLU = new plu(PLUcodes.get(i));
+			pluCodes.add(tempPLU);
+			//System.out.println(pluCodes.get(i).getPlu());
 		}
 	}
 	
-	void updatePLU(int plucode, int timeSec){
+	void updatePLU(int plucode, int timeSec) {
 		plu tempPLU = new plu(plucode);
 		int index = pluCodes.indexOf(tempPLU);
-		pluCodes.get(index).updateIntervals(timeSec);	
+		for(int i = 0; i < pluCodes.size(); i++) {
+			if(pluCodes.get(i).getPlu() == plucode) {
+				index = i;
+				break;
+			}
+		}
+		pluCodes.get(index).updateIntervals(timeSec);
 	}
-	
 
+	public String getDate() {
+		return Date;
+	}
+
+	public void setDate(String date) {
+		Date = date;
+	}
 }
